@@ -1,70 +1,41 @@
+import throttle from 'lodash.throttle';
 
 const formEl = document.querySelector('.feedback-form');
 const inputEl = document.querySelector('input');
 const messageEl = document.querySelector('textarea');
+const STORAGE_KEY = 'feedback-form-state';
 
-formEl.addEventListener('input', onInputChange);
+formEl.addEventListener('input', throttle(onInputChange, 500));
 formEl.addEventListener('submit', onFormSubmit);
+fillForm();
+
+const formData = {}; 
 
 function onInputChange(event) {
-    const formElements = event.currentTarget.elements;
-    const email = formElements.email.value;
-    const message = formElements.message.value;
-
-    const formData = {
-        email,
-        message,
-    }
-    localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+    formData[event.target.name] = event.target.value;
+    console.log(formData);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    console.log(STORAGE_KEY);
 };
 
 function onFormSubmit(event) {
     event.preventDefault();
-
-    const rawValues = localStorage.getItem('feedback-form-state');
+    event.currentTarget.reset();
+    const rawValues = localStorage.getItem(STORAGE_KEY);
     const valuesObject = JSON.parse(rawValues);
     console.log(valuesObject);
-
-    event.currentTarget.reset();
+    localStorage.removeItem(STORAGE_KEY);
 }
 
- const rawValues = localStorage.getItem('feedback-form-state');
- const valuesObject = JSON.parse(rawValues);
+function fillForm() {
+    const rawValues = localStorage.getItem(STORAGE_KEY);
+    const valuesObject = JSON.parse(rawValues);
    
- const savedEmail = valuesObject.email;
- const savedMessage = valuesObject.message;
- 
- if(savedEmail) {
-     document.querySelector('input').value = savedEmail;
- };
- if(savedMessage) {
-     document.querySelector('textarea').value = savedMessage;
- };
+if(valuesObject) {
+    const savedEmail = valuesObject.email;
+    inputEl.value = savedEmail;
 
-
-
-// inputEl.addEventListener('change', onInputChange);
-// messageEl.addEventListener('change', onTextAreaChange);
-
-// function onInputChange(e) {
-//    const currentEmail = e.currentTarget.value;
-//    console.log(currentEmail);
-//    localStorage.setItem('current-email', currentEmail);
-// };
-// function onTextAreaChange(e) {
-//     const currentMessage = e.currentTarget.value;
-//     console.log(currentMessage);
-//     localStorage.setItem('current-message', currentMessage);
-// }
-
-// const savedEmail = localStorage.getItem('current-email');
-// const savedMessage = localStorage.getItem('current-message');
-
-// if(savedEmail) {
-//     document.querySelector('input').value = savedEmail;
-// };
-// if(savedMessage) {
-//     document.querySelector('textarea').value = savedMessage;
-// };
-
-
+    const savedMessage = valuesObject.message;
+    messageEl.value = savedMessage;
+};
+};
