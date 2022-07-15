@@ -1,9 +1,9 @@
     
-     import Vimeo from '@vimeo/player';
-     const throttle = require('lodash.throttle');
+    import Vimeo from '@vimeo/player';
+    const throttle = require('lodash.throttle');
 
-     const iframe = document.querySelector('iframe');
-     const player = new Vimeo(iframe);
+    const iframe = document.querySelector('iframe');
+    const player = new Vimeo(iframe);
        
     const onPlay = function(data) {
         const time = data.seconds;

@@ -18,6 +18,8 @@ function onInputChange(event) {
 
 function onFormSubmit(event) {
     event.preventDefault();
+    formData.email = inputEl.value;
+    formData.message = messageEl.value;
     console.log(formData);
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
