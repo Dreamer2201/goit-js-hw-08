@@ -18,13 +18,9 @@ function onInputChange(event) {
 
 function onFormSubmit(event) {
     event.preventDefault();
-    const formElements = event.currentTarget.elements;
-    // const formData.email = formElements.email.value;
-    // const formData.password = formElements.password.value;
     console.log(formData);
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
-
 }
 
 function fillForm() {
