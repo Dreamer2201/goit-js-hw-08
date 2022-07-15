@@ -18,4 +18,4 @@ function createGallleryMarkup(galleryItems) {
 
 listGallery.insertAdjacentHTML('beforeend', createGallleryMarkup(galleryItems));
 
-const gallery = new SimpleLightbox('.gallery__item', { captionSelector: 'img', captionsData: 'alt', captionPosition: 'bottom', captionDelay: 250 });
+new SimpleLightbox('.gallery__item', { captionSelector: 'img', captionsData: 'alt', captionPosition: 'bottom', captionDelay: 250 });

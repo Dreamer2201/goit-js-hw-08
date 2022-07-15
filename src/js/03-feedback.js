@@ -18,11 +18,13 @@ function onInputChange(event) {
 
 function onFormSubmit(event) {
     event.preventDefault();
+    const formElements = event.currentTarget.elements;
+    // const formData.email = formElements.email.value;
+    // const formData.password = formElements.password.value;
+    console.log(formData);
     event.currentTarget.reset();
-    const rawValues = localStorage.getItem(STORAGE_KEY);
-    const valuesObject = JSON.parse(rawValues);
-    console.log(valuesObject);
     localStorage.removeItem(STORAGE_KEY);
+
 }
 
 function fillForm() {

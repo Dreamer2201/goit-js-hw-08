@@ -10,15 +10,10 @@
         localStorage.setItem("videoplayer-current-time", time);
     };
 
-    let savedTime = localStorage.getItem("videoplayer-current-time");  
+    const savedTime = localStorage.getItem("videoplayer-current-time");  
 
     player.on('timeupdate', throttle(onPlay, 1000));
-    player.setCurrentTime(savedTime).then(function(seconds) {
-}).catch(function(error) {
-    switch (error.name) {
-        case 'RangeError':
-            break;
-        default:
-            break;
+    if(savedTime) {
+        player.setCurrentTime(savedTime);
     }
-});
+    
